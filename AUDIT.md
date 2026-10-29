@@ -21,6 +21,6 @@ Python检查使用Linux/Python 3.12。测试结果是本次本地执行记录，
 
 ## 仍未验证的范围
 
-尚未验证PostgreSQL/Redis、登录支付完整链路、Android APK编译或设备安装。依赖升级不代表全仓库无安全问题。
+GitHub Actions 已完成 Android Debug APK 编译及产物上传（run 40862219692）。尚未验证PostgreSQL/Redis、登录支付完整链路或设备安装。依赖升级不代表全仓库无安全问题。
 
 删除仅针对已确认失效、重复说明或可再生成产物。源码、必要资产和不同版本保留；更改可从Git提交历史恢复。

@@ -34,3 +34,5 @@ gradle assembleDebug
 ```
 
 GitHub Actions 也使用 Gradle 8.6。APK 构建及真机行为未在本地验证。包名以 `android/app/build.gradle` 为准。此次修复及验证见 [AUDIT.md](AUDIT.md)。
+
+Android Debug APK compilation also passed in [GitHub Actions run 40862219692](https://github.com/Alethevia/Miaomiaokaiheiwu/actions/runs/40862219692). Device installation and real service/payment flows remain unverified.
