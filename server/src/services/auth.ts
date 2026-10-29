@@ -27,7 +27,7 @@ interface TokenBlacklist {
 
 export class AuthService {
   private jwtSecret: string;
-  private jwtExpiresIn: string;
+  private jwtExpiresIn: number;
   private tokenBlacklist: TokenBlacklist = {};
   private readonly isProduction: boolean;
 
@@ -48,7 +48,12 @@ export class AuthService {
       logger.warn('警告: 使用随机生成的JWT密钥，服务重启后所有token将失效');
     }
 
-    this.jwtExpiresIn = process.env.JWT_EXPIRES_IN || '7d';
+    const ttl = process.env.JWT_EXPIRES_IN || '7d';
+    const match = /^(\d+)([smhd])?$/.exec(ttl);
+    if (!match) throw new Error('JWT_EXPIRES_IN must be positive seconds or a duration such as 7d');
+    const units: Record<string, number> = { s: 1, m: 60, h: 3600, d: 86400 };
+    this.jwtExpiresIn = Number(match[1]) * (units[match[2] || 's']);
+    if (!Number.isSafeInteger(this.jwtExpiresIn) || this.jwtExpiresIn <= 0) throw new Error('Invalid JWT_EXPIRES_IN');
 
     // 定期清理过期的黑名单token
     setInterval(() => this.cleanupBlacklist(), 60 * 60 * 1000); // 每小时清理

@@ -22,7 +22,7 @@ const nextConfig = {
 
   // 禁用构建时的类型检查和 ESLint（加快构建速度）
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
     ignoreDuringBuilds: true,

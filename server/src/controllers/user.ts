@@ -192,7 +192,7 @@ export class UserController {
           coachProfile: {
             include: {
               services: true,
-              games: {
+              coachGames: {
                 include: {
                   game: true,
                 },

@@ -5,7 +5,7 @@
 
 import { Coach, Order, User, Conversation, Video, LiveRoom, Banner } from '@/types';
 import { coaches, orders, conversations, videos, liveRooms, banners, defaultUser } from '@/data/mock';
-import { apiClient, socketClient, shouldUseMock, setUseMock, ApiError } from '@/lib/apiClient';
+import { apiClient, socketClient, shouldUseMock, ApiError } from '@/lib/apiClient';
 
 // 模拟网络延迟（仅Mock模式）
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -58,12 +58,6 @@ async function apiCall<T>(
     return transformResponse(result);
   } catch (error) {
     if (error instanceof ApiError) {
-      // 连接失败，切换到Mock模式
-      if (error.status === 0 || error.status === 500) {
-        console.warn('API调用失败，降级到Mock模式');
-        setUseMock(true);
-        return mockFn();
-      }
       return { success: false, error: error.message };
     }
     return { success: false, error: '未知错误' };

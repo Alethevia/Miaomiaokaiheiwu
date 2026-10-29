@@ -1,3 +1,5 @@
+> 部署设计记录：网站本地构建已验证；Android、支付和线上部署仍需各自环境验证。以 README.md 和 AUDIT.md 为准。
+
 # 喵喵电竞 - 部署指南
 
 ## 项目结构
@@ -105,7 +107,7 @@ npm run build:android
 
 ```bash
 cd android
-./gradlew assembleRelease
+gradle assembleRelease
 ```
 
 APK 输出位置: `android/app/build/outputs/apk/release/app-release.apk`

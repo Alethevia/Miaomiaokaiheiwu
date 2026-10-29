@@ -28,18 +28,6 @@ const tabPages = ['home', 'discover', 'live', 'messages', 'profile'];
 function AppContent() {
   const { currentPage, isLoggedIn, hasSeenOnboarding } = useApp();
 
-  // 未完成引导
-  if (!hasSeenOnboarding) {
-    return <Onboarding />;
-  }
-
-  // 未登录
-  if (!isLoggedIn) {
-    return <Login />;
-  }
-
-  const showTabBar = tabPages.includes(currentPage);
-
   // 页面配置：决定过渡动画类型
   const pageConfig = useMemo(() => {
     // Tab页面使用快速淡入淡出
@@ -53,6 +41,19 @@ function AppContent() {
     // 其他页面使用从右往左滑动
     return { animation: 'slideLeft' as const, duration: 250 };
   }, [currentPage]);
+
+
+  // 未完成引导
+  if (!hasSeenOnboarding) {
+    return <Onboarding />;
+  }
+
+  // 未登录
+  if (!isLoggedIn) {
+    return <Login />;
+  }
+
+  const showTabBar = tabPages.includes(currentPage);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -147,6 +148,7 @@ function AppContent() {
 export default function Home() {
   return (
     <AppProvider>
+      {process.env.NEXT_PUBLIC_USE_MOCK === "true" && <div role="status" style={{position: "fixed", top: 0, left: 0, right: 0, zIndex: 99999, textAlign: "center", background: "#78350f", color: "white", padding: 6}}>演示模式：人物、订单、余额和分析为模拟内容，不会产生真实交易。</div>}
       <AppContent />
     </AppProvider>
   );

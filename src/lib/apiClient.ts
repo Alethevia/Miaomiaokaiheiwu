@@ -118,14 +118,7 @@ class ApiClient {
         throw error;
       }
 
-      // 网络错误，可能后端未启动，启用Mock模式
       const errorMessage = error instanceof Error ? error.message : '';
-      if (IS_DEV && errorMessage.includes('fetch')) {
-        console.warn('后端未连接，启用Mock模式');
-        USE_MOCK = true;
-        throw new ApiError(0, '后端服务未启动，已切换到Mock模式');
-      }
-
       throw new ApiError(500, errorMessage || '网络错误');
     }
   }

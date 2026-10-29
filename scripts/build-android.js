@@ -422,7 +422,7 @@ async function main() {
     console.log('   2. 同步 Gradle (Sync Project with Gradle Files)');
     console.log('   3. 运行应用 (Run app)');
     console.log('\n或使用命令行:');
-    console.log('   cd android && ./gradlew assembleDebug');
+    console.log('   cd android && gradle assembleDebug');
     console.log('');
 
   } catch (error) {

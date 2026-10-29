@@ -66,7 +66,7 @@ export class CoachController {
             coachProfile: {
               include: {
                 services: true,
-                games: {
+                coachGames: {
                   include: {
                     game: true,
                   },
@@ -228,7 +228,7 @@ export class CoachController {
           coachProfile: {
             include: {
               services: true,
-              games: {
+              coachGames: {
                 include: {
                   game: true,
                 },

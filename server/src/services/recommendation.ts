@@ -60,7 +60,7 @@ export class RecommendationService {
       // 获取用户订单历史
       const orders = await prisma.order.findMany({
         where: { userId, status: 'completed' },
-        select: { coachId: true, totalAmount: true },
+        select: { coachId: true, totalPrice: true },
         orderBy: { createdAt: 'desc' },
         take: 20,
       });
@@ -112,7 +112,7 @@ export class RecommendationService {
         .map(([tag]) => tag);
 
       // 计算价格范围偏好
-      const prices = orders.map(o => o.totalAmount);
+      const prices = orders.map(o => o.totalPrice);
       const avgPrice = prices.length > 0 ? prices.reduce((a, b) => a + b, 0) / prices.length : 5000;
 
       return {
